@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1:3306
--- Üretim Zamanı: 12 Ara 2022, 13:33:54
+-- Üretim Zamanı: 15 Ara 2022, 12:25:10
 -- Sunucu sürümü: 5.7.36
 -- PHP Sürümü: 7.4.26
 
@@ -24,26 +24,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `user`
+-- Tablo için tablo yapısı `firmuser`
 --
 
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE IF NOT EXISTS `user` (
-  `Uid` int(11) NOT NULL,
+DROP TABLE IF EXISTS `firmuser`;
+CREATE TABLE IF NOT EXISTS `firmuser` (
+  `Uid` int(11) NOT NULL AUTO_INCREMENT,
   `Email` varchar(30) COLLATE utf8_turkish_ci NOT NULL,
   `Name` varchar(30) COLLATE utf8_turkish_ci NOT NULL,
   `UserName` varchar(30) COLLATE utf8_turkish_ci NOT NULL,
   `Password` varchar(15) COLLATE utf8_turkish_ci NOT NULL,
   `City` varchar(30) COLLATE utf8_turkish_ci NOT NULL,
   `District` varchar(30) COLLATE utf8_turkish_ci NOT NULL,
-  `Address` varchar(30) COLLATE utf8_turkish_ci NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+  `Address` varchar(30) COLLATE utf8_turkish_ci NOT NULL,
+  PRIMARY KEY (`Uid`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 --
--- Tablo döküm verisi `user`
+-- Tablo döküm verisi `firmuser`
 --
 
-INSERT INTO `user` (`Uid`, `Email`, `Name`, `UserName`, `Password`, `City`, `District`, `Address`) VALUES
+INSERT INTO `firmuser` (`Uid`, `Email`, `Name`, `UserName`, `Password`, `City`, `District`, `Address`) VALUES
 (1, 'Movielover@gmail.com', 'Jane', 'Movielover', 'Bishop', '', '', ''),
 (2, 'Cinefil6263@gmail.com', 'Umut ', 'Cinefil', '123456', 'ANKARA', 'Altındağ', 'cucu sok./ falan mah.');
 COMMIT;

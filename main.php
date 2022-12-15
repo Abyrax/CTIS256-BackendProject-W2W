@@ -34,10 +34,11 @@
 		<script src="js/ie-support/html5.js"></script>
 		<script src="js/ie-support/respond.js"></script>
 		<![endif]-->
+		
 
 	</head>
 
-
+  	
 	<body>
 		
 
@@ -57,7 +58,7 @@
 						<ul class="menu">
 							<li class="menu-item current-menu-item"><a href="index.html">Home</a></li>
 							<li class="menu-item"><a href="about.html"><?=$userData["Name"] ?></a></li>
-							<li class="menu-item"><a href="review.html">Movie reviews</a></li>
+							<li class="menu-item"><a href="addMovie.php">Add Movie</a></li>
 							<li class="menu-item"><a href="profile.php">Edit Profile</a></li>
 							<li class="menu-item"><a href="logout.php">Logout</a></li>
 						</ul> <!-- .menu -->
