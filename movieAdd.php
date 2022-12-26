@@ -1,6 +1,6 @@
 <?php
 
-require "db.php";
+require_once "main.php";
 
 if(isset($_POST["save"])){
 
@@ -15,22 +15,18 @@ if(isset($_POST["save"])){
     
 
     
+    if($_FILES['image']['error'] == 0){
+        $image = time().'_'.$_FILES['image']['name'];
+        $image_tmp = $_FILES['image']['tmp_name'];
+        $image_move = move_uploaded_file($image_tmp, './assets/img/'.$image);
 
-    if(!empty($_FILES['image']['name'])){
+        if($image_move){
 
-        $file= basename( $_FILES['image']['name']);
-        $fileType=pathinfo($file, PATHINFO_EXTENSION);
-        
-        $allowTypes=array('jpg','png','jpeg','gif','webp');
-
-        if(in_array($fileType,$allowTypes)){
-
-            $image=$_FILES['image']['tmp_name'];
-            $imageContent=addslashes(file_get_contents($image));
+            
             if($Rate>0 && $Rate<=10){
                 $insert=$db->prepare("INSERT INTO movies (MovieName,Director,Year,Rate,Image,Description,Current) values (?,?,?,?,?,?,?)");
                
-                $insert->execute([$MovieName,$Director,$Date,$Rate,$imageContent,$Description,$Created]);
+                $insert->execute([$MovieName,$Director,$Date,$Rate,$image,$Description,$Created]);
                 
             }else{
                 

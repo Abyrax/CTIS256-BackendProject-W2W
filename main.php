@@ -1,6 +1,6 @@
 <?php
   session_start() ;
-  require "db.php" ;
+  require "./db.php" ;
   // check if the user authenticated before
   if( !validSession()) {
       header("Location: login.php?error") ;
@@ -21,15 +21,16 @@
 		
 		<title>Movie Review</title>
 
-		<!-- Loading third party fonts -->
-		<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
-		<link href="fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		<!-- Loading main css file -->
-		<link rel="stylesheet" href="./style.css">
-		
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 		<!--[if lt IE 9]>
 		<script src="js/ie-support/html5.js"></script>
 		<script src="js/ie-support/respond.js"></script>
@@ -42,49 +43,38 @@
 	<body>
 		
 
-		<div id="site-content">
-			<header class="site-header">
-				<div class="container">
-					<a href="index.html" id="branding">
-						<img src="images/logo.png" alt="" class="logo">
-						<div class="logo-copy">
-							<h1 class="site-title">Company Name</h1>
-							<small class="site-description">Tagline goes here</small>
-						</div>
-					</a> <!-- #branding -->
+				<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand" href="#">Moviee</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-					<div class="main-navigation">
-						<button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
-						<ul class="menu">
-							<li class="menu-item current-menu-item"><a href="index.html">Home</a></li>
-							<li class="menu-item"><a href="about.html"><?=$userData["Name"] ?></a></li>
-							<li class="menu-item"><a href="addMovie.php">Add Movie</a></li>
-							<li class="menu-item"><a href="profile.php">Edit Profile</a></li>
-							<li class="menu-item"><a href="logout.php">Logout</a></li>
-						</ul> <!-- .menu -->
-
-						<div class="btn-group">
-							<button type="button" class="btn btn-warning dropdown-toggle" data-mdb-toggle="dropdown" aria-expanded="false">
-							<?=$userData["Name"] ?>
-							</button>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="#"><?=$userData["Name"] ?></a></li>
-								<li><a class="dropdown-item" href="profileFirm.php">Edit Profile</a></li>
-								<li><a class="dropdown-item" href="#">My Favourite Movies</a></li>
-								<li><hr class="dropdown-divider" /></li>
-								<li><a class="dropdown-item" href="logout.php">Log Out</a></li>
-							</ul>									
-						</div>
-
-						<form action="#" class="search-form">
-							<input type="text" placeholder="Search...">
-							<button><i class="fa fa-search"></i></button>
-						</form>
-					</div> <!-- .main-navigation -->
-
-
-        <script src="js/jquery-1.11.1.min.js"></script>
-		<script src="js/plugins.js"></script>
-		<script src="js/app.js"></script>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Link</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<?= $userData["Name"] ?>
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" href="profile.php">Edit Profile</a>
+					<a class="dropdown-item" href="movieAdd.php">Add Movie</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="#">Something else here</a>
+					</div>
+				</li>
+				
+				</ul>
+				<form class="form-inline my-2 my-lg-0" method="GET">
+				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				</form>
+			</div>
+			</nav>
                         
     </body>

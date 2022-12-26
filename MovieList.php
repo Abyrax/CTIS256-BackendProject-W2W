@@ -1,8 +1,6 @@
 <?php
 
-    require "db.php";
-
-    session_start();
+    require_once "main.php";
 
     $MovieList=$db->prepare("SELECT * FROM movies");
     $MovieList->execute();
@@ -116,58 +114,7 @@ table.table td .add {
 }
 </style>
 <script>
-$(document).ready(function(){
-	$('[data-toggle="tooltip"]').tooltip();
-	var actions = $("table td:last-child").html();
-	// Append table with add row form on add new button click
-    $(".add-new").click(function(){
-		$(this).attr("disabled", "disabled");
-		var index = $("table tbody tr:last-child").index();
-        var row = '<tr>' +
-            '<td><input type="text" class="form-control" name="name" id="name"></td>' +
-            '<td><input type="text" class="form-control" name="department" id="department"></td>' +
-            '<td><input type="text" class="form-control" name="phone" id="phone"></td>' +
-			'<td>' + actions + '</td>' +
-        '</tr>';
-    	$("table").append(row);		
-		$("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-	// Add row on add button click
-	$(document).on("click", ".add", function(){
-		var empty = false;
-		var input = $(this).parents("tr").find('input[type="text"]');
-        input.each(function(){
-			if(!$(this).val()){
-				$(this).addClass("error");
-				empty = true;
-			} else{
-                $(this).removeClass("error");
-            }
-		});
-		$(this).parents("tr").find(".error").first().focus();
-		if(!empty){
-			input.each(function(){
-				$(this).parent("td").html($(this).val());
-			});			
-			$(this).parents("tr").find(".add, .edit").toggle();
-			$(".add-new").removeAttr("disabled");
-		}		
-    });
-	// Edit row on edit button click
-	$(document).on("click", ".edit", function(){		
-        $(this).parents("tr").find("td:not(:last-child)").each(function(){
-			$(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
-		});		
-		$(this).parents("tr").find(".add, .edit").toggle();
-		$(".add-new").attr("disabled", "disabled");
-    });
-	// Delete row on delete button click
-	$(document).on("click", ".delete", function(){
-        $(this).parents("tr").remove();
-		$(".add-new").removeAttr("disabled");
-    });
-});
+
 </script>
 </head>
 <body>
@@ -178,7 +125,7 @@ $(document).ready(function(){
                 <div class="row">
                     <div class="col-sm-8"><h2>Employee <b>Details</b></h2></div>
                     <div class="col-sm-4">
-                        <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>
+                        <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i><a href="movieAdd.php">Add New</a> </button>
                     </div>
                 </div>
             </div>
@@ -193,16 +140,16 @@ $(document).ready(function(){
                     </tr>
                 </thead>
                 <tbody>
-                   <?php foreach($Movies as $movie): ?>
+                   <?php foreach($Movies as $key=>$movie): ?>
                     <tr>
                         <td><?=  $movie["MovieName"]?></td>
                         <td><?=  $movie["Director"]?></td>
                         <td><?=  $movie["Rate"]?>/10</td>
                         <td><?=  $movie["Year"]?></td>
                         <td>
-                            <a class="add" title="Add" data-toggle="tooltip" ><i class="material-icons">&#xE03B;</i></a>
-                            <a class="edit" title="Edit" data-toggle="tooltip" href="editMovie.php?id=<?=$movie["MovieId"] ?>"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                            <a class="add" title="Add"  ><i class="material-icons">&#xE03B;</i></a>
+                            <a class="edit" title="Edit"  href="MovieEdit.php?id=<?=$movie["MovieId"] ?>"><i class="material-icons">&#xE254;</i></a>
+                            <a class="delete" title="Delete"  href="MovieDelete.php?id=<?= $movie["MovieId"]?>"><i class="material-icons">&#xE872;</i></a>
                         </td>
                     </tr>
                     <?php endforeach ?>      

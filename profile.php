@@ -1,6 +1,6 @@
 <?php
-session_start();
-require "db.php";
+require_once "main.php";
+
 
 
 
@@ -45,7 +45,6 @@ if(isset($_POST["update"])){
     }
 }
 
-var_dump($_SESSION['user']["Name"]);
 
 
 
@@ -71,6 +70,7 @@ var_dump($_SESSION['user']["Name"]);
     <title>Document</title>
 </head>
 <body>
+
 <div class="container">
     <h1>Edit Profile</h1>
   	<hr>
@@ -85,10 +85,9 @@ var_dump($_SESSION['user']["Name"]);
       <!-- edit form column -->
       <div class="col-md-9 personal-info">
         <div class="alert alert-info alert-dismissable">
-          <a class="panel-close close" data-dismiss="alert">×</a> 
+          <a class="panel-close close" data-dismiss="alert"></a> 
           <i class="fa fa-coffee"></i>
-          This is an <strong>.alert</strong>. Use this to show important messages to the user.
-        </div>
+         
         <h3>Personal info</h3>
         
         <form class="form-horizontal" role="form" method="post" >
