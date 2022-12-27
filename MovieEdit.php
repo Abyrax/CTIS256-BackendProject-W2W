@@ -23,7 +23,7 @@
 
 
             $update=$db->prepare("UPDATE movies SET MovieName=?,Director=?,Year=?,Description=?,Rate=?,Image=? WHERE MovieId=?");
-            $update->exeute([$MovieName,$Director,$Date,$Description,$Rate,$image,$_GET["id"]]);
+            $update->execute([$MovieName,$Director,$Date,$Description,$Rate,$image,$_GET["id"]]);
 
             if($update){
                 $control = $db->prepare('SELECT * FROM movies WHERE MovieId = ?');

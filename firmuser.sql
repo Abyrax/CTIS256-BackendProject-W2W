@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1:3306
--- Üretim Zamanı: 15 Ara 2022, 12:25:10
+-- Üretim Zamanı: 27 Ara 2022, 18:27:03
 -- Sunucu sürümü: 5.7.36
 -- PHP Sürümü: 7.4.26
 
@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS `firmuser` (
   `City` varchar(30) COLLATE utf8_turkish_ci NOT NULL,
   `District` varchar(30) COLLATE utf8_turkish_ci NOT NULL,
   `Address` varchar(30) COLLATE utf8_turkish_ci NOT NULL,
+  `Type` int(11) DEFAULT NULL,
   PRIMARY KEY (`Uid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
@@ -44,9 +45,9 @@ CREATE TABLE IF NOT EXISTS `firmuser` (
 -- Tablo döküm verisi `firmuser`
 --
 
-INSERT INTO `firmuser` (`Uid`, `Email`, `Name`, `UserName`, `Password`, `City`, `District`, `Address`) VALUES
-(1, 'Movielover@gmail.com', 'Jane', 'Movielover', 'Bishop', '', '', ''),
-(2, 'Cinefil6263@gmail.com', 'Umut ', 'Cinefil', '123456', 'ANKARA', 'Altındağ', 'cucu sok./ falan mah.');
+INSERT INTO `firmuser` (`Uid`, `Email`, `Name`, `UserName`, `Password`, `City`, `District`, `Address`, `Type`) VALUES
+(2, 'Ahmetoglu1234@gmail.com', 'Umut', 'Movielover', 'Cinemalover123', 'ANKARA', 'Yenimahallefdgd', 'cucu sok./ falan mah.', 0),
+(1, 'Movielover@gmail.com', 'Ahmet', 'Cinefil', '123456', 'ANKARA', 'Yenimahalle', 'cucu sok./ falan mah.', 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

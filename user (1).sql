@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1:3306
--- Üretim Zamanı: 15 Ara 2022, 12:25:20
+-- Üretim Zamanı: 27 Ara 2022, 18:28:02
 -- Sunucu sürümü: 5.7.36
 -- PHP Sürümü: 7.4.26
 
@@ -34,7 +34,6 @@ CREATE TABLE IF NOT EXISTS `user` (
   `Name` varchar(30) COLLATE utf8_turkish_ci NOT NULL,
   `Username` varchar(30) COLLATE utf8_turkish_ci NOT NULL,
   `Password` varchar(15) COLLATE utf8_turkish_ci NOT NULL,
-  `Type` int(11) NOT NULL,
   PRIMARY KEY (`Uid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
@@ -42,8 +41,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Tablo döküm verisi `user`
 --
 
-INSERT INTO `user` (`Uid`, `Email`, `Name`, `Username`, `Password`, `Type`) VALUES
-(1, 'Ahmetoglu1234@gmail.com', 'Ahmet', 'xKralTr', '12121314', 0);
+INSERT INTO `user` (`Uid`, `Email`, `Name`, `Username`, `Password`) VALUES
+(1, 'Ahmetoglu1234@gmail.com', 'Ahmet', 'xKralTr', '12121314');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
