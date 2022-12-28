@@ -7,6 +7,11 @@
     $control->execute([$_GET['id']]);
     $result = $control->fetchAll()[0];
 
+    $control = $db->query('SELECT * FROM movies');
+    $Owners=$control->fetchAll(PDO::FETCH_ASSOC);
+
+
+
     var_dump($_GET['id']);
 
     if(isset($_POST["save"])){
@@ -16,6 +21,9 @@
         $Date=$_POST["Date"];
         $Description=$_POST["Description"];
         $Rate=$_POST["Rate"];
+        $Owner=$_POST["Owner"];
+
+        var_dump($Owner);
 
 
         if($_FILES['image']['error'] == 0){
@@ -24,8 +32,8 @@
             $image_move = move_uploaded_file($image_tmp, './assets/img/'.$image);
 
 
-            $update=$db->prepare("UPDATE movies SET MovieName=?,Director=?,Year=?,Description=?,Rate=?,Image=? WHERE MovieId=?");
-            $update->execute([$MovieName,$Director,$Date,$Description,$Rate,$image,$_GET["id"]]);
+            $update=$db->prepare("UPDATE movies SET MovieName=?,Director=?,Year=?,Description=?,Rate=?,Image=?,Owner=? WHERE MovieId=?");
+            $update->execute([$MovieName,$Director,$Date,$Description,$Rate,$image,$Owner,$_GET["id"]]);
 
             if($update){
                 $control = $db->prepare('SELECT * FROM movies WHERE MovieId = ?');
@@ -85,20 +93,19 @@
                 <div class="col-md-12"><label class="labels">Year</label><input type="Date" class="form-control"  value="<?= $result["Year"]?>" name="Date"></div>
                     <div class="col-md-12"><label class="labels">Description</label><textarea name="Description" id="" cols="60" rows="10"><?= $result["Description"]?></textarea></div>
                     <div class="col-md-12"><label class="labels">Rate (?/10)</label><input type="number" class="form-control"  value="<?= $result["Rate"]?>" name="Rate"></div>
-                    <?php if($userData["Type"]==0){
-                        echo "<select class='form-select form-select-lg mb-3' aria-label='.form-select-lg example' name='UserType'>
-                        <option selected>Select The User Type</option>
-                        <option value='0'>Admin</option>
-                        <option value='1'>Firm User</option>
-                        <option value='2'>Movie Editor</option>
-                        <option value='3'>Movie Lover</option>
-                        </select>
-                        ";
-                    } ?>
+                    <div class="col-md-12"></div>
+                   
                     
                 </div>
                 
                 <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="save"> Add Movie </button></div>
+                <div> <?php if($userData["Type"]==0&&$result["Status"]==1){
+                        echo "<select class='form-select form-select-lg mb-3' aria-label='.form-select-lg example' name='Owner'>";
+                        echo" <option selected>Select The Owner</option>";
+                        for($i=0;$i<count($Owners);$i++){
+                            echo " <option value='{$Owners[$i]["Owner"]}'>{$Owners[$i]["Owner"]}</option>";
+                        }
+                    } ?></div>
             </div>
         </div>
         

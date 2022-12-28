@@ -25,6 +25,13 @@
         $rs->execute([$_GET["id"]]);
         
     }
+    if(isset($_GET["Sort"])){
+
+        $MovieList=$db->prepare("SELECT * FROM movies ORDER BY Year");
+        $MovieList->execute();
+        $Movies=$MovieList->fetchAll();
+
+    }
    
 
 
@@ -145,6 +152,7 @@ table.table td .add {
                     <div class="col-sm-8"><h2>Employee <b>Details</b></h2></div>
                     <div class="col-sm-4">
                         <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i><a href="movieAdd.php">Add New</a> </button>
+                        <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i><a href="?Sort">Order By Year</a> </button>
                     </div>
                 </div>
             </div>

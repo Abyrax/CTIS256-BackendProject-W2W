@@ -14,6 +14,15 @@
     }
 
 
+    if(isset($_GET["Bydate"])){
+
+      $MovieList=$db->prepare("SELECT * FROM movies ORDER BY Year");
+      $MovieList->execute();
+      $movies=$MovieList->fetchAll();
+
+  }
+
+
    
     
     
