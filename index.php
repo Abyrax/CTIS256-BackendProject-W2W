@@ -8,14 +8,14 @@
         $rs->execute(['%'.$_GET['search'].'%']);
         $movies=$rs->fetchAll();
     }else{
-        $rs=$db->prepare("SELECT * FROM movies");
+        $rs=$db->prepare("SELECT * FROM movies WHERE status=1");
         $rs->execute();
         $movies=$rs->fetchAll();
     }
 
 
    
-    var_dump($movies[0]["Image"]);
+    
     
     
 

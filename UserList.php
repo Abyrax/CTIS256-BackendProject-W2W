@@ -29,9 +29,7 @@
 <style>
 body {
    
-    color: #404E67;
-    background: #F5F7FA;
-    font-family: 'Open Sans', sans-serif;
+   
 }
 .table-wrapper {
     width: 700px;
@@ -120,9 +118,7 @@ table.table td .add {
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-8"><h2>User<b>List</b></h2></div>
-                    <div class="col-sm-4">
-                        <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i><a href="movieAdd.php">Add New</a> </button>
-                    </div>
+                    
                 </div>
             </div>
             <table class="table table-bordered">

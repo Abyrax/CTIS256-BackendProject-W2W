@@ -60,9 +60,7 @@
 				<li class="nav-item active">
 					<a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Link</a>
-				</li>
+
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<?= $userData["Name"] ?>
@@ -70,8 +68,13 @@
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 					<a class="dropdown-item" href="profile.php">Edit Profile</a>
 					<a class="dropdown-item" href="movieAdd.php">Add Movie</a>
+					<a class="dropdown-item" href="MovieList.php">My MovieList</a>
+					<a class="dropdown-item" href="?Bydate">Sort Movies By Date</a>
+					<?php if($userData["Type"]==0){
+						echo "<a class='dropdown-item' href='UserList.php'>Display Users</a>";
+					} ?>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#">Something else here</a>
+					<a class="dropdown-item" href="logout.php">Logout</a>
 					</div>
 				</li>
 				

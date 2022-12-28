@@ -2,9 +2,30 @@
 
     require_once "main.php";
 
-    $MovieList=$db->prepare("SELECT * FROM movies");
-    $MovieList->execute();
-    $Movies=$MovieList->fetchAll();
+
+    if($userData["Type"]==0){
+        $MovieList=$db->prepare("SELECT * FROM movies");
+        $MovieList->execute();
+        $Movies=$MovieList->fetchAll();
+
+    }else{
+        $MovieList=$db->prepare("SELECT * FROM movies WHERE Owner LIKE ?");
+       
+        
+        $MovieList->execute(['%'.$userData["Name"].'%']);
+        $Movies=$MovieList->fetchAll();
+
+    }
+
+    if(isset($_GET["id"])){
+
+
+
+        $rs=$db->prepare("UPDATE movies SET status=1 WHERE MovieId=?");
+        $rs->execute([$_GET["id"]]);
+        
+    }
+   
 
 
 
@@ -30,9 +51,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <style>
 body {
-    color: #404E67;
-    background: #F5F7FA;
-    font-family: 'Open Sans', sans-serif;
+    
 }
 .table-wrapper {
     width: 700px;
@@ -136,21 +155,33 @@ table.table td .add {
                         <th>Director</th>
                         <th>Rating</th>
                         <th>Date</th>
+                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                   <?php foreach($Movies as $key=>$movie): ?>
+                   <?php foreach($Movies as $movie): ?>
                     <tr>
                         <td><?=  $movie["MovieName"]?></td>
                         <td><?=  $movie["Director"]?></td>
                         <td><?=  $movie["Rate"]?>/10</td>
                         <td><?=  $movie["Year"]?></td>
+                        <?php if($movie["Status"]==0){
+                            echo "<td>Waiting</td>";
+                        }else{
+                            echo "<td>Accepted</td>"; 
+                        } ?>
                         <td>
                             <a class="add" title="Add"  ><i class="material-icons">&#xE03B;</i></a>
                             <a class="edit" title="Edit"  href="MovieEdit.php?id=<?=$movie["MovieId"] ?>"><i class="material-icons">&#xE254;</i></a>
                             <a class="delete" title="Delete"  href="MovieDelete.php?id=<?= $movie["MovieId"]?>"><i class="material-icons">&#xE872;</i></a>
+                            <?php if($userData["Type"]==0&&$movie["Status"]==0){
+
+                             ?>
+                            <a title="Accept"  href="MovieList.php?id=<?=$movie["MovieId"] ?>"><i class="material-icons">&#10003;</i></a>
+                            <?php } ?>
                         </td>
+
                     </tr>
                     <?php endforeach ?>      
                 </tbody>

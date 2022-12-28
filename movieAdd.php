@@ -24,9 +24,9 @@ if(isset($_POST["save"])){
 
             
             if($Rate>0 && $Rate<=10){
-                $insert=$db->prepare("INSERT INTO movies (MovieName,Director,Year,Rate,Image,Description,Current) values (?,?,?,?,?,?,?)");
+                $insert=$db->prepare("INSERT INTO movies (MovieName,Director,Year,Rate,Image,Description,Current,Owner,Status) values (?,?,?,?,?,?,?,?,?)");
                
-                $insert->execute([$MovieName,$Director,$Date,$Rate,$image,$Description,$Created]);
+                $insert->execute([$MovieName,$Director,$Date,$Rate,$image,$Description,$Created,$userData["Name"],0]);
                 
             }else{
                 

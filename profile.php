@@ -12,12 +12,21 @@ if(!isset($_SESSION['user'])){
 
 if(isset($_POST["update"])){
 
-    
+  $Name=$_POST["Name"];
+  $City=$_POST["City"];
+  $Address=$_POST["Address"];
+  $District=$_POST["District"];
 
 
     $Selected=$db->prepare("SELECT * FROM firmuser WHERE Uid= ?");
     $Selected->execute([$_SESSION['user']['Uid']]);
     $SelectedResult=$Selected->fetchAll();
+
+    $SelectedName=$db->prepare("UPDATE movies SET Owner=? WHERE Owner=?");
+    $Selected->execute([$Name,$_SESSION['user']['Name']]);
+    $SelectedResult=$Selected->fetchAll();
+
+
 
     if(isset($_POST["Password"])){
         $password=$_POST["Password"];
@@ -25,10 +34,7 @@ if(isset($_POST["update"])){
         $password=$SelectedResult[0]["Password"];
     }
 
-    $Name=$_POST["Name"];
-    $City=$_POST["City"];
-    $Address=$_POST["Address"];
-    $District=$_POST["District"];
+   
 
     $updated=$db->prepare("UPDATE firmuser SET Name= ?,Password = ?, City= ?, Address= ?, District = ? WHERE Uid = ? ");
     $updated->execute([$Name,$password,$City,$Address,$District,$_SESSION['user']['Uid']]);

@@ -1,10 +1,11 @@
 <?php
    require_once("./main.php");
+   
     
 
    $control = $db->prepare('SELECT * FROM movies WHERE MovieId = ?');
     $control->execute([$_GET['id']]);
-    $result = $control->fetch(PDO::FETCH_ASSOC);
+    $result = $control->fetchAll()[0];
 
     var_dump($_GET['id']);
 
@@ -15,6 +16,7 @@
         $Date=$_POST["Date"];
         $Description=$_POST["Description"];
         $Rate=$_POST["Rate"];
+
 
         if($_FILES['image']['error'] == 0){
             $image = time().'_'.$_FILES['image']['name'];
@@ -27,8 +29,8 @@
 
             if($update){
                 $control = $db->prepare('SELECT * FROM movies WHERE MovieId = ?');
-                $control->execute([$_GET['id']]);
-                $result = $control->fetch(PDO::FETCH_ASSOC);
+                $control->execute([$_GET["id"]]);
+                $result = $control->fetchAll()[0];
                 $messages = '<div class="alert alert-success" role="alert">Update product completed successfully</div>';
             }
         }
@@ -56,7 +58,7 @@
 </head>
 <body>
 
-<form action="?" method="POST" enctype="multipart/form-data">
+<form method="POST" action="" enctype="multipart/form-data">
 <div class="container   mt-4 mb-5">
 <?php
             if(isset($messages)){
@@ -76,13 +78,23 @@
                 </div>
                 <div class="row mt-2">
                     
-                    <div class="col-md-6"><label class="labels">Movie Name</label><input type="text" class="form-control" value="<?= $result["MovieName"]?>" name="MovieName"><?= $_GET["id"]?></div>
+                    <div class="col-md-6"><label class="labels">Movie Name</label><input type="text" class="form-control" value="<?= $result["MovieName"]?>" name="MovieName"></div>
                     <div class="col-md-6"><label class="labels">Director</label><input type="text" class="form-control"  value="<?= $result["Director"]?>" name="Director"></div>
                 </div>
                 <div class="row mt-3">
                 <div class="col-md-12"><label class="labels">Year</label><input type="Date" class="form-control"  value="<?= $result["Year"]?>" name="Date"></div>
                     <div class="col-md-12"><label class="labels">Description</label><textarea name="Description" id="" cols="60" rows="10"><?= $result["Description"]?></textarea></div>
                     <div class="col-md-12"><label class="labels">Rate (?/10)</label><input type="number" class="form-control"  value="<?= $result["Rate"]?>" name="Rate"></div>
+                    <?php if($userData["Type"]==0){
+                        echo "<select class='form-select form-select-lg mb-3' aria-label='.form-select-lg example' name='UserType'>
+                        <option selected>Select The User Type</option>
+                        <option value='0'>Admin</option>
+                        <option value='1'>Firm User</option>
+                        <option value='2'>Movie Editor</option>
+                        <option value='3'>Movie Lover</option>
+                        </select>
+                        ";
+                    } ?>
                     
                 </div>
                 
